@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CarsRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CarsRepository;
 
 #[ORM\Entity(repositoryClass: CarsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Cars
 {
     #[ORM\Id]
@@ -52,6 +54,34 @@ class Cars
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $options = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slugMarque = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slugModele = null;
+
+    /**
+     * Permet d'initialiser le slug automatiquement si on ne le donne pas
+     *
+     * @return void
+     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initializeSlug(): void 
+    {
+        if(empty($this->slugMarque))
+        {
+            $slugify = new Slugify();
+            $this->slugMarque = $slugify->slugify($this->marque);
+        }
+
+        if(empty($this->slugModele))
+        {
+            $slugify = new Slugify();
+            $this->slugModele = $slugify->slugify($this->modele);
+        }
+    }
 
     public function getId(): ?int
     {
@@ -210,6 +240,30 @@ class Cars
     public function setOptions(string $options): static
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    public function getSlugMarque(): ?string
+    {
+        return $this->slugMarque;
+    }
+
+    public function setSlugMarque(string $slugMarque): static
+    {
+        $this->slugMarque = $slugMarque;
+
+        return $this;
+    }
+
+    public function getSlugModele(): ?string
+    {
+        return $this->slugModele;
+    }
+
+    public function setSlugModele(string $slugModele): static
+    {
+        $this->slugModele = $slugModele;
 
         return $this;
     }
