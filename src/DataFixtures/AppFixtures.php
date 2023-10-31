@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Cars;
+use App\Entity\Image;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -17,7 +18,7 @@ class AppFixtures extends Fixture
 
         $marques=['Renault','Mercedes','Porshe','BMW','Audi','Volvo','Volkswagen','Alfa Romeo'];
         $modeles=['Arkana','CLA','Gt3 RS','Serie 3','Q3','XC40','Golf 8','Giulia'];
-        $coverImgs=['arkana.jpg','cla.jpg','gt3.png','serie3.jpg','q3.jpg','xc40.jpg','golf8.jpg','giulia.jpeg'];
+        $coverImgs=['https://www.auto-infos.fr/mediatheque/7/1/9/000276917_600x400_c.JPG','https://images.caradisiac.com/logos-ref/modele/modele--mercedes-cla-2-amg/S0-modele--mercedes-cla-2-amg.jpg','https://www.topgear.com/sites/default/files/2022/08/CFM_2458v1.jpg','https://cdn.lesnumeriques.com/optim/news/18/183299/dfb9091e-la-bmw-serie-3-s-offre-un-facelift-et-de-nouvelles-technologies-pour-2022__1200_900__0-33-2177-1260.jpeg','https://images.caradisiac.com/logos-ref/modele/modele--audi-q3-2e-generation-sportback/S0-modele--audi-q3-2e-generation-sportback.jpg','https://annuelauto.ca/wp-content/uploads/2022/05/6777b344fd630383b540589c24e55f4702fae0af.jpeg','https://assets.volkswagen.com/is/image/volkswagenag/VW_GTI_Night_34Front?Zml0PWNyb3AlMkMxJndpZD04MDAmaGVpPTUzMyZmbXQ9anBlZyZxbHQ9NzkmYmZjPW9mZiYyOTg5','https://www.media.stellantis.com/cache/2/3/7/9/0/23790855ff401e6bc944bdaafd40c71faad51a20.jpeg'];
         $carburants=['essence','diesel','electrique','hybride'];
         $annees=['2018','2019','2020','2021','2022','2023'];
         $transmissions=['traction','propulsion','intégrale'];
@@ -49,6 +50,19 @@ class AppFixtures extends Fixture
                 ->setTransmission($transmission)
                 ->setDescription($description)
                 ->setOptions($options);
+
+                for($j=1;$j<=rand(1,4);$j++)
+                {
+                    $image = new Image();
+
+                    $url = $coverImg;
+                    $caption = "La ".$marque." ".$modele." Image n°".$j;
+
+                    $image->setUrl($url)
+                          ->setCaption($caption)
+                          ->setCars($car);
+                    $manager->persist($image);
+                }
 
             $manager->persist($car);
         }
