@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
         $annees=['2018','2019','2020','2021','2022','2023'];
         $transmissions=['traction','propulsion','intégrale'];
         $description = '<p>'.join('</p><p>',$faker->paragraphs(3)).'</p>';
-        $options = $faker->paragraph(3);
+        $options = '<p>'.join('</p><p>',$faker->paragraphs(6)).'</p>';
 
         for($i=0;$i<8;$i++)
         {
@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
                 ->setCoverImg($coverImg)
                 ->setKm(rand(2000,200000))
                 ->setPrix(rand(10000,80000))
-                ->setProprietaire(rand(0,8))
+                ->setProprietaire(rand(0,5))
                 ->setCylindree(rand(1400,2000))
                 ->setPuissance(rand(70,200))
                 ->setCarburant($carburant)

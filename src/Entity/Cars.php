@@ -8,9 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CarsRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarsRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(fields:['modele'], message:"Un autre véhicule de ce modèle est déjà en vente")]
 class Cars
 {
     #[ORM\Id]
@@ -19,42 +22,55 @@ class Cars
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,max:255,minMessage:"La marque doit dépasser les 4 caractères",maxMessage:"La marque ne doit pas dépasser les 255 caractères")]
     private ?string $marque = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,max:255,minMessage:"Le modèle doit dépasser les 4 caractères",maxMessage:"Le modèle ne doit pas dépasser les 255 caractères")]
     private ?string $modele = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Url(message:"Veuillez entrer une url valide")]
     private ?string $coverImg = null;
 
     #[ORM\Column]
+    #[Assert\Type(type:"integer",message:"Veuillez entrer un nombre")]
     private ?int $km = null;
 
     #[ORM\Column]
+    #[Assert\Type(type:"float",message:"Veuillez entrer un nombre")]
     private ?float $prix = null;
 
     #[ORM\Column]
+    #[Assert\Type(type:"integer",message:"Veuillez entrer un nombre")]
     private ?int $proprietaire = null;
 
     #[ORM\Column]
+    #[Assert\Type(type:"integer",message:"Veuillez entrer un nombre")]
     private ?int $cylindree = null;
 
     #[ORM\Column]
+    #[Assert\Type(type:"integer",message:"Veuillez entrer un nombre")]
     private ?int $puissance = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,max:255,minMessage:"Le carburant doit dépasser les 4 caractères",maxMessage:"Le carburant ne doit pas dépasser les 255 caractères")]
     private ?string $carburant = null;
 
     #[ORM\Column(length: 4)]
+    #[Assert\Length(min:4,max:4)]
     private ?string $annee = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,max:255,minMessage:"La transmission doit dépasser les 4 caractères",maxMessage:"La transmission ne doit pas dépasser les 255 caractères")]
     private ?string $transmission = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:100, minMessage:'Votre description doit faire plus de 100 caractères')]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:40, minMessage:'Vos Options doit faire plus de 40 caractères')]
     private ?string $options = null;
 
     #[ORM\Column(length: 255)]

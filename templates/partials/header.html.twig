@@ -6,14 +6,24 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home
+          <a class="nav-link active" href="{{path('homepage')}}">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Voitures</a>
+          <a class="nav-link" href="{{path('cars_index')}}">Voitures</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+{# {{dump(app.flashes)}} #}
+{% for label,messages in app.flashes %}
+    <div class="container">
+        <div class="alert alert-{{label}}">
+        {% for message in messages %}
+            <p>{{message | raw}}</p>
+        {% endfor %}
+        </div> 
+    </div>
+{% endfor %}
