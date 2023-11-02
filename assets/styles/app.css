@@ -76,6 +76,20 @@ footer{
     font-size: 2em;
 }
 
+.marque{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
 
+.marque a{
+    color: white;
+    background-color: black;
+    padding:10px;
+    margin:20px;
+    border: solid 1px black;
+    text-decoration: none;
+}
 
 

@@ -70,6 +70,26 @@ class CarsController extends AbstractController
     }
 
     /**
+     * Permet d'afficher les voitures en fonction de leurs marques
+     *
+     * @param string $marque
+     * @param CarsRepository $marque
+     * @return Response
+     */
+    #[Route('cars/marque/{marque}', name:'cars_marque')]
+    public function marque(string $marque,CarsRepository $repo): Response
+    {
+        $carsMarque = $repo->findAll();
+        $cars = $repo->findBy($criteria = ['slugMarque' => $marque], $orderBy = ['id' => 'DESC'], $limit = "4", $offset = null);
+
+        return $this->render('cars/marque.html.twig',[
+            'carsMarque' => $carsMarque,
+            'cars' => $cars,
+            'marque' => $marque
+        ]);
+    }
+
+    /**
      * Permet de modifier une annonce
      *
      * @param Request $request
@@ -123,4 +143,6 @@ class CarsController extends AbstractController
             'car' => $car
         ]);
     }
+
+
 }
