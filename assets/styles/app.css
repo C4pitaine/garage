@@ -35,7 +35,7 @@ footer{
 }
 
 .accueil{
-    background-color: rgb(206, 200, 200);
+    background-color: #676a6d;
 }
 
 .imageAcc{
@@ -43,8 +43,39 @@ footer{
     object-fit: contain;
 }
 
-#buttonAcc{
-    width:200px;
+
+#home{
+    background-image: url(/public/images/pexels-mike-bird-120049.jpg);
+    background-size: cover;
+    background-position: center center;
+    width:100%;
+    min-height:40vh;
+    overflow: hidden;
 }
+
+.bande{
+    height:20px;
+    background-color: #000000;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:40px 0;
+    flex-direction: column;
+}
+
+.info a{
+    width:200px;
+    margin:15px;
+}
+
+.infos{
+    color: white;
+    font-size: 2em;
+}
+
+
 
 

@@ -3,6 +3,11 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+    <div id="home">
+        <h2 class="d-flex justify-content-center text-white my-3">Welcome in SymfoGarage</h2>
+    </div>
+    <div class="bande">
+    </div>
     <div class="accueil">
         <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
@@ -17,10 +22,10 @@
             {% set url = path('cars_show', {'id':car.id}) %}
                 <div class="carousel-item {% if loop.first %}active{% endif %}">
                     <img src="{{car.coverImg}}" class="d-block w-100 imageAcc" alt="Image de {{car.marque}} {{car.modele}}">
-                    <div class="d-flex justify-content-center align-item-center my-3 text-center">
-                        <h2 class="my-3">{{car.marque}} {{car.modele}}</h2>
-                        <a href="{{url}}" class="btn btn-primary mt-2 mb-5 ms-5" id="buttonAcc">Voir plus</a>
-                    </div>      
+                    <div class="info">
+                        <div class="infos">{{car.marque}} {{car.modele}} - {{car.km}} KM  - {{car.prix}} €</div>
+                        <a href="{{url}}" class="btn btn-primary">Voir plus</a>
+                    </div>  
                 </div>
             {% endfor %}
         </div>
@@ -33,6 +38,8 @@
             <span class="visually-hidden">Next</span>
         </button>
         </div>
+    </div>
+    <div class="bande">
     </div>
         
 {% endblock %}

@@ -22,7 +22,7 @@ class CarsController extends AbstractController
      */
     #[Route('/cars', name: 'cars_index')]
     public function index(CarsRepository $repo): Response
-    {
+    {   
         $cars = $repo->findAll();
         return $this->render('cars/index.html.twig', [
             'cars' => $cars

@@ -22,11 +22,11 @@ class Cars
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min:4,max:255,minMessage:"La marque doit dépasser les 4 caractères",maxMessage:"La marque ne doit pas dépasser les 255 caractères")]
+    #[Assert\Length(min:2,max:255,minMessage:"La marque doit dépasser les 2 caractères",maxMessage:"La marque ne doit pas dépasser les 255 caractères")]
     private ?string $marque = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min:4,max:255,minMessage:"Le modèle doit dépasser les 4 caractères",maxMessage:"Le modèle ne doit pas dépasser les 255 caractères")]
+    #[Assert\Length(min:2,max:255,minMessage:"Le modèle doit dépasser les 2 caractères",maxMessage:"Le modèle ne doit pas dépasser les 255 caractères")]
     private ?string $modele = null;
 
     #[ORM\Column(length: 255)]
