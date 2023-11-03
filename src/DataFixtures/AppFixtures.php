@@ -4,13 +4,22 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Cars;
+use App\Entity\User;
 use App\Entity\Image;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -67,7 +76,25 @@ class AppFixtures extends Fixture
             $manager->persist($car);
         }
 
-        
+        $users = [];
+        $genres = ['male','femelle'];
+
+        for($u=1;$u<=2;$u++)
+        {
+            $user = new User();
+            $genre = $faker->randomElement($genres);
+
+            $hash = $this->passwordHasher->hashPassword($user, 'password');
+
+            $user->setFirstName($faker->firstName($genre))
+                 ->setLastName($faker->lastName())
+                 ->setEmail($faker->email())
+                 ->setPassword($hash)
+                 ->setPicture('');
+
+            $manager->persist($user);
+            $users[] = $user;
+        }
 
 
         $manager->flush();
