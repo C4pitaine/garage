@@ -17,6 +17,10 @@ footer{
     background-color: rgb(206, 200, 200);
 }
 
+.full{
+    min-height:70vh;
+}
+
 .cadre{
     border:solid 1px black;
 }
@@ -90,6 +94,11 @@ footer{
     margin:20px;
     border: solid 1px black;
     text-decoration: none;
+}
+
+.bouton{
+    height:fit-content;
+    margin-top: 1rem;
 }
 
 

@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier{% endblock %}
+
+{% block body %}
+    <div class="container full">
+    <h1 class="my-2">Modifier le profile</h1>
+        {{form_start(myForm)}}
+
+            {{form_widget(myForm)}}
+            <div class="d-flex">
+                <button type="submit" class="btn btn-success my-3">Confirmer la modification</button>
+                <a href="{{path('account_password')}}" class="btn btn-warning bouton mx-3">Modifier votre mot de passe</a>
+            </div>
+            
+
+        {{form_end(myForm)}}
+    </div>
+
+{% endblock %}

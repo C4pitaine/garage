@@ -80,6 +80,7 @@ class Cars
     private ?string $slugModele = null;
 
     #[ORM\OneToMany(mappedBy: 'cars', targetEntity: Image::class, orphanRemoval: true)]
+    #[Assert\Valid()]
     private Collection $images;
 
     public function __construct()
