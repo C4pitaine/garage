@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+
+use App\Entity\UserImgModify;
 use App\Entity\User;
 use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
+use App\Form\UserImgModifyType;
 use App\Form\PasswordUpdateType;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
@@ -199,4 +202,62 @@ class AccountController extends AbstractController
             'myForm' => $form->createView()
         ]);
     }
+
+    /**
+     * Permet de modifier l'image de profil d'un user
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[Route('/account/imgEdit', name:"account_imgedit")]
+    public function ImgEdit(Request $request, EntityManagerInterface $manager): Response
+    {
+        $imgEdit = new UserImgModify();
+
+        $user = $this->getUser();
+        $form = $this->createForm(UserImgModifyType::class, $imgEdit);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            if(!empty($user->getPicture()))
+            {
+                unlink($this->getParameter('uploads_directory').'/'.$user->getPicture());
+            }
+
+            $file = $form['newPicture']->getData();
+            if(!empty($file))
+            {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
+                try{
+                    $file->move(
+                        $this->getParameter('uploads_directory'), //où on va l'envoyer
+                        $newFilename // qui on envoit
+                    );
+                }catch(FileException $e)
+                {
+                    return $e->getMessage();
+                }
+
+                $user->setPicture($newFilename);
+            }
+
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre image de profil a bien été modifiée');
+
+            return $this->redirectToRoute('account_profile');
+        }
+
+
+        return $this->render('account/imgEdit.html.twig',[
+            'myForm' => $form->createView()
+        ]);
+    }
+
+    
 }

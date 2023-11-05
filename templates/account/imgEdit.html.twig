@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier{% endblock %}
+
+{% block body %}
+    <div class="container full">
+    <h1 class="my-2">Modifier l'image de profil</h1>
+
+        <img src="/uploadsUser/{{app.user.picture}}" alt="Image de {{app.user.email}}">
+        {{form_start(myForm)}}
+
+            {{form_widget(myForm)}}
+            <button type="submit" class="btn btn-success my-3">Confirmer la modification</button>
+
+        {{form_end(myForm)}}
+    </div>
+
+{% endblock %}
