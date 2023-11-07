@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CarsController extends AbstractController
@@ -37,6 +38,7 @@ class CarsController extends AbstractController
      * @return Response
      */
     #[Route('/cars/new',name:'cars_new')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $car = new Cars();
@@ -98,6 +100,7 @@ class CarsController extends AbstractController
      * @return Response
      */
     #[Route('cars/{id}/edit', name:"cars_edit")]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, EntityManagerInterface $manager, Cars $car): Response
     {
         $form = $this->createForm(CarsType::class, $car);

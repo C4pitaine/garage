@@ -22,9 +22,9 @@
                 {% set url = path('cars_show', {'id':car.id}) %}
                 <div class="col-md-4">
                     <div class="cadre my-3">
-                        <div class="text-black ms-3 mt-3">{{car.marque}} {{car.modele}}</div>
+                        <div class="text-black ms-3 mt-3">{{car.fullName}}</div>
                         <div class="text-black ms-3 mt-2">{{car.km}} KM</div>
-                        <img src="{{car.coverImg}}" alt="image de {{car.marque}} {{car.modele}}">
+                        <img src="{{car.coverImg}}" alt="image de {{car.fullName}}">
                         <div class="d-flex my-3 justify-content-center align-items-center">
                             <div class="text-black me-3">A partir de {{car.prix}} €</div>
                             <a href="{{url}}" class="btn btn-primary">En savoir plus</a>

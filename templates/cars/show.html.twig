@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Annonce: {{car.marque}} {{car.modele}}{% endblock %}
+{% block title %}Annonce: {{car.fullName}}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <img src="{{car.coverImg}}" alt="Image de {{car.marque}} {{car.modele}}" class="showImg">
-        <h1 class="my-3">{{car.marque}} {{car.modele}}</h1>
+        <img src="{{car.coverImg}}" alt="Image de {{car.fullName}}" class="showImg">
+        <h1 class="my-3">{{car.fullName}}</h1>
         <p class="fs-4">Kilométrage: {{car.km}} KM</p>
         <p class="fs-4">Prix: {{car.prix}} €</p>
         <p class="fs-4">Nombre de propriétaire: {{car.proprietaire}}</p>
@@ -31,9 +31,9 @@
                         <div class="carousel-inner">
                             {% for image in car.images %}
                                 <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                    <img src="{{image.url}}" class="d-block w-100" alt="image de {{car.marque}} {{car.modele}}">
+                                    <img src="{{image.url}}" class="d-block w-100" alt="image de {{car.fullName}}">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5 class="text-white">{{car.marque}} {{car.modele}}</h5>
+                                        <h5 class="text-white">{{car.fullName}}</h5>
                                         <p>{{image.caption}}</p>
                                     </div>
                                 </div>

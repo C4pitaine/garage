@@ -110,6 +110,16 @@ class Cars
         }
     }
 
+    /**
+     * Permet d'avoir La marque + le modèle en une fois
+     *
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return $this->marque." ".$this->modele;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

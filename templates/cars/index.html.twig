@@ -22,13 +22,13 @@
                 <div class="col-md-4">
                     <div class="cadre my-3">
                         <div class="d-flex">
-                            <div class="text-black ms-3 mt-3">{{car.marque}} {{car.modele}}</div>
-                            {% if app.user %}
+                            <div class="text-black ms-3 mt-3">{{car.fullName}}</div>
+                            {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{urlEdit}}" class="btn btn-warning m-2">Modifier</a>
                             {% endif %}
                         </div>
                         <div class="text-black ms-3 mt-2">{{car.km}} KM</div>
-                        <img src="{{car.coverImg}}" alt="image de {{car.marque}} {{car.modele}}">
+                        <img src="{{car.coverImg}}" alt="image de {{car.fullName}}">
                         <div class="d-flex my-3 justify-content-center align-items-center">
                             <div class="text-black me-3">A partir de {{car.prix}} €</div>
                             <a href="{{url}}" class="btn btn-primary">En savoir plus</a>
