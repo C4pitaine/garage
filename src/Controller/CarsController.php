@@ -132,6 +132,26 @@ class CarsController extends AbstractController
     }
 
     /**
+     * Permet de supprimer une voiture de la bdd
+     *
+     * @param Cars $car
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[Route('/cars/{id}/delete',name:"cars_delete")]
+    public function delete(Cars $car, EntityManagerInterface $manager): Response
+    {
+        $manager->remove($car);
+
+        $manager->flush();
+
+        $this->addFlash('success',"Vous avez bien supprimer la voiture : <strong>".$car->getMarque()." ".$car->getModele()."</strong>");
+
+        return $this->redirectToRoute('cars_index');
+
+    }
+
+    /**
      * Permet d'afficher une voiture en fonction de son id
      *
      * @param integer $id
