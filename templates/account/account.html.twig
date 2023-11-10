@@ -15,8 +15,10 @@
             <div class="col-9 mt-5">
                 <div class="d-flex">
                     <h1 class="me-2">{{user.fullName}} </h1>
-                    {% if user.roles %}
-                        <h2>- {{user.roles[0]}}</h2>
+                    {% if user.roles[0] == 'ROLE_ADMIN' %}
+                        <h2>- ADMIN</h2>
+                    {% else %}
+                        <h2>- USER</h2>
                     {% endif %}
                     
                 </div>
