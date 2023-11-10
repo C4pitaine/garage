@@ -7,9 +7,14 @@
         <div class="container">
             <div class="row">
                 <div class="marque">
+                    {# On affiche les marques de la bdd en supprimant les doublons  #}
+                    {% set uniqueCars = [] %}
                     {% for car in cars %}
-                    {% set urlMarque = path('cars_marque', {'marque':car.slugMarque}) %}
-                        <a href="{{urlMarque}}">{{car.marque}}</a>
+                        {% set urlMarque = path('cars_marque', {'marque': car.slugMarque}) %}
+                        {% if car.marque not in uniqueCars %}
+                            {% set uniqueCars = uniqueCars|merge([car.marque]) %}
+                            <a href="{{urlMarque}}">{{ car.marque }}</a>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
