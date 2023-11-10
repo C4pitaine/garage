@@ -11,7 +11,7 @@
                     {% set urlMarque = path('cars_marque', {'marque':carMarque.slugMarque}) %}
                         <a href="{{urlMarque}}">{{carMarque.marque}}</a>
                     {% endfor %}
-                    <a href="{{path('cars_index')}}">Voir Tout</a>
+                    <a href="{{path('cars_index')}}" class="seeAll">Voir Tout</a>
                 </div>
             </div>
         </div>

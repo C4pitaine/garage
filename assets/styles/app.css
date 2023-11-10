@@ -101,5 +101,25 @@ footer{
     margin-top: 1rem;
 }
 
+.seeAll{
+    background-color: rgb(98, 0, 255) !important;
+}
+
+.avatar{
+    max-width: 128px;
+    max-height: 128px;
+    border-radius:50%;
+}
+
+.avatar-medium{
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.avatar-mini{
+    max-width: 24px;
+    max-height: 24px;
+}
+
 
 

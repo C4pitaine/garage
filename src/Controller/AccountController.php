@@ -25,6 +25,22 @@ use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthentication
 class AccountController extends AbstractController
 {
     /**
+     * Permet d'afficher le profil d'un utilisateur
+     *
+     * @return Response
+     */
+    #[Route('/account', name:"account_show")]
+    #[IsGranted('ROLE_USER')]
+    public function account(): Response
+    {
+        return $this->render('/account/account.html.twig',[
+            'user' => $this->getUser()
+        ]);
+    }
+
+
+
+    /**
      * Permet de se connecter
      *
      * @param AuthenticationUtils $utils
