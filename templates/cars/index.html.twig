@@ -25,15 +25,13 @@
                 {% set url = path('cars_show', {'id':car.id}) %}
                 {% set urlEdit = path('cars_edit', {'id':car.id}) %}
                 {% set urlDelete = path('cars_delete', {'id':car.id}) %}
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="cadre my-3">
-                        <div class="d-flex">
-                            <div class="text-black ms-3 mt-3">{{car.fullName}}</div>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{urlEdit}}" class="btn btn-warning m-2">Modifier</a>
-                                <a href="{{urlDelete}}" class="btn btn-danger m-2">Supprimer</a>
-                            {% endif %}
-                        </div>
+                        <div class="text-black ms-3 mt-3">{{car.fullName}}</div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{urlEdit}}" class="btn btn-warning m-2">Modifier</a>
+                            <a href="{{urlDelete}}" class="btn btn-danger m-2">Supprimer</a>
+                        {% endif %}
                         <div class="text-black ms-3 mt-2">{{car.km}} KM</div>
                         <img src="{{car.coverImg}}" alt="image de {{car.fullName}}">
                         <div class="d-flex my-3 justify-content-center align-items-center">

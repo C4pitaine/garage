@@ -121,5 +121,13 @@ footer{
     max-height: 24px;
 }
 
-
+@media all and (max-width:800px)
+{
+    .link-profile{
+        flex-direction: column;
+    }
+    .link-profile a, .link-profile button{
+        width:250px;
+    }
+}
 

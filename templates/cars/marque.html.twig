@@ -27,7 +27,7 @@
                 {% set url = path('cars_show', {'id':car.id}) %}
                 {% set urlEdit = path('cars_edit', {'id':car.id}) %}
                 {% set urlDelete = path('cars_delete', {'id':car.id}) %}
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="cadre my-3">
                         <div class="text-black ms-3 mt-3">{{car.fullName}}</div>
                         {% if is_granted('ROLE_ADMIN') %}
