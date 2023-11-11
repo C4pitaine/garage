@@ -5,14 +5,14 @@
 {% block body %}
     <div class="container full">
         <div class="row align-items-center">
-            <div class="col-3 text-center mt-5">
+            <div class="col-md-3 text-center mt-5">
                 {% if user.picture %}
                     <img src="/uploadsUser/{{user.picture}}" alt="Avatar de {{user.fullName}}" class="avatar mb-3">
                 {% else %}
                     <img src="http://placehold.it/300x300" alt="Avatar de {{user.fullName}}" class="avatar mb-3">
                 {% endif %}
             </div>
-            <div class="col-9 mt-5">
+            <div class="col-md-9 mt-5">
                 <div class="d-flex">
                     <h1 class="me-2">{{user.fullName}} </h1>
                     {% if user.roles[0] == 'ROLE_ADMIN' %}
