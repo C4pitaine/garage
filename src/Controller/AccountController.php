@@ -96,11 +96,10 @@ class AccountController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $file = $form['picture']->getData();
+            $file = $form['picture']->getData(); // récupère les information de l'image
             if(!empty($file))
             {
                 //gestion de l'image
-                $file = $form['picture']->getData(); // récupère les information de l'image
                 if(!empty($file))
                 {
                     $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -121,7 +120,7 @@ class AccountController extends AbstractController
             }
 
             $hash = $hasher->hashPassword($user, $user->getPassword());
-            $user->setPAssword($hash);
+            $user->setPassword($hash);
 
             $manager->persist($user);
             $manager->flush();
