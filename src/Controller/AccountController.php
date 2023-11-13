@@ -97,27 +97,26 @@ class AccountController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $file = $form['picture']->getData(); // récupère les information de l'image
+            
+            //gestion de l'image
             if(!empty($file))
             {
-                //gestion de l'image
-                if(!empty($file))
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
+                try{
+                    $file->move(
+                        $this->getParameter('uploads_directory'), //où on va l'envoyer
+                        $newFilename // qui on envoit
+                    );
+                }catch(FileException $e)
                 {
-                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                    $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                    $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
-                    try{
-                        $file->move(
-                            $this->getParameter('uploads_directory'), //où on va l'envoyer
-                            $newFilename // qui on envoit
-                        );
-                    }catch(FileException $e)
-                    {
-                        return $e->getMessage();
-                    }
-
-                    $user->setPicture($newFilename);
+                    return $e->getMessage();
                 }
+
+                $user->setPicture($newFilename);
             }
+            
 
             $hash = $hasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
