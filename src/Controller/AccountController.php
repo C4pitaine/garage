@@ -96,7 +96,7 @@ class AccountController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $file = $form['picture']->getData(); // récupère les information de l'image
+            $file = $form['picture']->getData(); 
             
             //gestion de l'image
             if(!empty($file))
@@ -106,8 +106,8 @@ class AccountController extends AbstractController
                 $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
                 try{
                     $file->move(
-                        $this->getParameter('uploads_directory'), //où on va l'envoyer
-                        $newFilename // qui on envoit
+                        $this->getParameter('uploads_directory'), 
+                        $newFilename 
                     );
                 }catch(FileException $e)
                 {
@@ -159,7 +159,7 @@ class AccountController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $user->setSlug('') // on a déjà le slug de fait
+            $user->setSlug('') 
                  ->setPicture($fileName);
 
             $manager->persist($user);
@@ -252,8 +252,8 @@ class AccountController extends AbstractController
                 $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
                 try{
                     $file->move(
-                        $this->getParameter('uploads_directory'), //où on va l'envoyer
-                        $newFilename // qui on envoit
+                        $this->getParameter('uploads_directory'), 
+                        $newFilename 
                     );
                 }catch(FileException $e)
                 {

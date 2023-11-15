@@ -33,8 +33,8 @@ class CarsType extends ApplicationType
             ->add('slugMarque',TextType::class,$this->getConfiguration('SlugMarque','Fait automatiquement',['required'=>false]))
             ->add('slugModele',TextType::class,$this->getConfiguration('SlugModèle','Fait automatiquement',['required'=>false]))
             ->add('images', CollectionType::class, [
-                'entry_type' => ImageType::class, // on vient chercher le formulaire qu'on a créer pour les images
-                'allow_add' => true, // pour le data_prototype
+                'entry_type' => ImageType::class, 
+                'allow_add' => true, 
                 'allow_delete' => true
             ])
         ;

@@ -9,16 +9,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+    /**
+     * Permet de donner à l'accueil les 4 dernières voitures de la bdd
+     *
+     * @param CarsRepository $repo
+     * @return Response
+     */
     #[Route('/', name: 'homepage')]
     public function index(CarsRepository $repo): Response
     {
-        /**
-         * Permet de donner à l'accueil les 4 dernières voitures de la bdd
-         */
+
         $cars = $repo->findBy($criteria = [], $orderBy = ['id' => 'DESC'], $limit = "4", $offset = null);
-        /**
-         * Affiche la page d'Accueil
-         */
+        
         return $this->render('index.html.twig', [
             "cars" => $cars
         ]);

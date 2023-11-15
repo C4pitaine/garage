@@ -25,8 +25,6 @@ class RegistrationType extends ApplicationType
                 'label' => "Photo de profil",
                 'required' => false
             ])
-            // ->add('roles')
-            // ->add('slug')
         ;
     }
 

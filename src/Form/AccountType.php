@@ -17,14 +17,6 @@ class AccountType extends ApplicationType
             ->add('firstName',TextType::class,$this->getConfiguration('Prénom:','Votre prénom...'))
             ->add('lastName',TextType::class,$this->getConfiguration('Nom:','Votre nom de famille...'))
             ->add('email',EmailType::class,$this->getConfiguration('Email:','Votre email...'))
-            // ->add('password',PasswordType::class,$this->getConfiguration('Mot de passe:','Votre mot de passe...'))
-            // ->add('confirmPassword',PasswordType::class,$this->getConfiguration('Confirmation:','Confirmer le mot de passe...'))
-            // ->add('picture',FileType::class,[
-            //     'label' => "Photo de profil",
-            //     'required' => false
-            // ])
-            // ->add('roles')
-            // ->add('slug')
         ;
     }
 
